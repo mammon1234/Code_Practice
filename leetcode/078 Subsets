@@ -1,0 +1,45 @@
+public class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        if( nums == null){
+            return ans;
+        }
+        List<Integer> list = new ArrayList<Integer>();
+        Arrays.sort(nums);
+        subdfs( ans, list, nums, 0);
+        return ans;
+    }
+    private void subdfs( List<List<Integer>> ans, List<Integer> list, int [] nums, int pos){
+        ans.add(new ArrayList<Integer> (list));
+        for( int i = pos; i < nums.length; i ++){
+            list.add(nums[i]);
+            subdfs( ans, list, nums, i+1);
+            list.remove(list.size()-1);
+        }
+    }
+}
+
+
+public class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        if( nums == null ||  nums.length == 0){
+            return ans;
+        }
+        int len = nums.length;
+        Arrays.sort(nums);
+        long numOfSet = (long)Math.pow(2, len);
+        for( int i = 0; i < numOfSet; i ++ ){
+            long tmp = i;
+            ArrayList<Integer> list = new ArrayList<Integer>();
+            while( tmp != 0){
+                int indexOfLast1 = Long.numberOfTrailingZeros(tmp);
+                //返回在指定 long 值的二进制补码表示形式中最低位（最右边）的 1 位之后的零位的数量。
+                list.add(nums[indexOfLast1]);
+                tmp ^= (1 << indexOfLast1);
+                //异或，同为0， 异为1；
+            }
+            ans.add(list);
+        }
+        return ans;
+    }
