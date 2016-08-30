@@ -1,0 +1,23 @@
+public class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        if( nums == null){
+            return ans;
+        }
+        List<Integer> list = new ArrayList< Integer >();
+        Arrays.sort(nums);
+        subdfs( ans, list, nums, 0);
+        return ans;
+    }
+    private void subdfs( List<List<Integer>> ans, List<Integer> list, int[] nums, int pos){
+        ans.add(new ArrayList<Integer>( list ));
+        for( int i = pos; i < nums.length; i ++ ){
+            if( i != pos && nums[i-1] == nums[i]){
+                continue;
+            }
+            list.add( nums[i] );
+            subdfs( ans, list, nums, i+1);
+            list.remove(list.size()-1);
+        }
+    }
+}
