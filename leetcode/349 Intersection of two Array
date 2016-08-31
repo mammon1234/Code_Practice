@@ -1,0 +1,24 @@
+public class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        // Write your code here
+        if(nums1 == null || nums2 == null){
+            return null;
+        }
+        HashSet<Integer> hs1 = new HashSet<Integer>();
+        HashSet<Integer> hs2 = new HashSet<Integer>();
+        for( int i = 0; i < nums1.length; i ++){
+            hs1.add(nums1[i]);
+        }
+        for( int j = 0; j < nums2.length; j++){
+            if(hs1.contains(nums2[j])){
+                hs2.add(nums2[j]);
+            }
+        }
+        Object[] ob= hs2.toArray();
+        int[] ans = new int[ob.length];
+        for( int q = 0; q < ob.length; q ++){
+            ans[q] = (int) ob[q];
+        }
+        return ans;
+    }
+}
