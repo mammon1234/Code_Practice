@@ -1,0 +1,19 @@
+public class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+     if( matrix == null || matrix.length == 0){
+         return false; 
+     }
+     int probe_row = matrix.length - 1;
+     int probe_column = 0;
+     while( probe_row >= 0 && probe_column < matrix[0].length){
+         if( matrix[probe_row][probe_column] == target){
+             return true;
+         } else if( matrix[probe_row][probe_column] < target){
+             probe_column+=1;
+         }else{
+             probe_row-=1;
+         }
+     }
+     return false;
+    }
+}
