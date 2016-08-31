@@ -44,3 +44,30 @@ public class Solution {
         return false;
     }
 }
+
+// one search
+public class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if( matrix == null || matrix.length == 0){
+            return false;
+        }
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int start = 0;
+        int end = row * column - 1;
+        int mid, temp_row, temp_column;
+        while( start + 1 < end ){
+            mid = start + ( end - start ) / 2;
+            temp_row = mid / column;
+            temp_column = mid % column;
+            if( matrix[temp_row ][ temp_column] == target){
+                return true;
+            }else if( matrix[temp_row ][ temp_column] < target ){
+                start = mid;
+            }else{
+                end = mid;
+            }
+        }
+        return matrix[ start / column][ start % column ] == target || matrix[ end / column ][end % column] == target;
+    }
+}
