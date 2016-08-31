@@ -51,3 +51,35 @@ public class Solution {
         return false;
     }
 }
+// one time
+public class Solution {
+    /**
+     * @param matrix, a list of lists of integers
+     * @param target, an integer
+     * @return a boolean, indicate whether matrix contains target
+     */
+    public boolean searchMatrix(int[][] matrix, int target) {
+        // write your code here
+        if( matrix == null || matrix.length == 0){
+            return false;
+        }
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int start = 0;
+        int end = row * column -1;
+        int mid, temp_row, temp_column;
+        while( start < end){
+            mid = start + ( end - start) / 2;
+            temp_row = mid / column;
+            temp_column = mid % column;
+            if( matrix[ temp_row][temp_column] == target){
+                return true;
+            }else if( matrix[ temp_row][temp_column] > target){
+                end = mid;
+            }else{
+                start = mid;
+            }
+        }
+        return matrix[start / column][start % column] == target || matrix[ end / column ][ end % column] == target;
+    }
+}
