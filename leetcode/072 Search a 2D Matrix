@@ -1,0 +1,46 @@
+public class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if( matrix == null || matrix.length == 0){
+            return false;
+        }
+        int start, mid, end;
+        int row;
+        //find the target in row
+        start = 0;
+        end = matrix.length - 1;
+        while( start + 1 < end){
+            mid = start + (end -start)/2;
+            if( matrix[mid][0] == target ){
+                return true;
+            }else if( matrix[mid][0] >target){
+                end = mid;
+            }else{
+                start = mid;
+            }
+        }
+        if( matrix[end][0] <= target ){
+            row = end;
+        }else if(matrix[start][0] <= target ){
+            row = start;
+        }else{
+            return false;
+        }
+        //find the target in column
+        start = 0;
+        end = matrix[0].length - 1;
+        while( start + 1 < end){
+            mid = start + (end - start) / 2;
+            if( matrix[row][mid] == target){
+                return true;
+            }else if( matrix[row][mid] > target){
+                end = target;
+            }else{
+                start = target;
+            }
+        }
+        if( matrix[row][start] == target || matrix[row][end] == target){
+            return true;
+        }
+        return false;
+    }
+}
