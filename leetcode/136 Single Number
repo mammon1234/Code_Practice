@@ -10,3 +10,22 @@ public class Solution {
         return res;
     }
 }
+//Use HashSet
+ public int Find( int [] arrays){
+        if( arrays == null || arrays.length == 0){
+            return Integer.MIN_VALUE;
+        }
+        HashSet<Integer> hs = new HashSet<Integer>();
+        for( int i = 0; i < arrays.length; i++){
+            if(hs.contains(arrays[i])){
+                hs.remove(arrays[i]);
+            }else{
+                hs.add(arrays[i]);
+            }
+        }
+        //HashSet change into int;
+        //Integer[] ans = hs.toArray(new Integer[]{});
+        //return (int) ans[0];
+        Object[] ans = hs.toArray();
+        return (int) ans[0];
+    }
