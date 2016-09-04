@@ -32,3 +32,40 @@ public class Solution {
         traverse( root.right, ans);
     }
 }
+
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+public class Solution {
+    /**
+     * @param root: The root of binary tree.
+     * @return: Preorder in ArrayList which contains node values.
+     */
+    public ArrayList<Integer> preorderTraversal(TreeNode root) {
+        // write your code here
+        Stack<TreeNode> stack = new Stack<TreeNode> ();
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        if( root != null){
+            stack.push(root);
+        }
+        while(!stack.isEmpty()){
+            TreeNode cur = stack.pop();
+            ans.add(cur.val);
+            if( cur.right!= null){
+                stack.push(cur.right);
+            }
+            if( cur.left !=null){
+                stack.push(cur.left);
+            }
+        }
+        return ans;
+    }
+}
