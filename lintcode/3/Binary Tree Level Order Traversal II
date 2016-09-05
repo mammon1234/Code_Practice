@@ -1,0 +1,44 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+ 
+ 
+public class Solution {
+    /**
+     * @param root: The root of binary tree.
+     * @return: buttom-up level order a list of lists of integer
+     */
+    public ArrayList<ArrayList<Integer>> levelOrderBottom(TreeNode root) {
+        // write your code here
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
+        if(root == null){
+            return ans;
+        }
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        q.add(root);
+        while(!q.isEmpty()){
+            ArrayList<Integer> temp = new ArrayList<Integer>();
+            int length = q.size();
+            for(int i =0; i<length; i++){
+                TreeNode dummy = q.remove();
+                temp.add(dummy.val);
+                if(dummy.left!=null){
+                    q.add(dummy.left);
+                }
+                if(dummy.right!=null){
+                    q.add(dummy.right);
+                }
+            }
+            ans.add(0,temp);
+        }
+        return ans;
+    }
+}
