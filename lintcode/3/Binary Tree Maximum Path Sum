@@ -1,0 +1,41 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+public class Solution {
+    /**
+     * @param root: The root of binary tree.
+     * @return: An integer.
+     */
+    public int maxPathSum(TreeNode root) {
+        // write your code here
+        ResultType ans = subdfs(root);
+        return ans.MaxPath;
+    }
+    private class ResultType{
+        int SinglePath, MaxPath;
+        ResultType(int SinglePath, int MaxPath){
+            this.SinglePath = SinglePath;
+            this.MaxPath = MaxPath;
+        }
+    }
+    private ResultType subdfs( TreeNode root){
+        if( root == null ){
+            return new ResultType( 0, Integer.MIN_VALUE);
+        }
+        ResultType left = subdfs(root.left);
+        ResultType right =subdfs(root.right);
+        int SinglePath = Math.max(0, Math.max(left.SinglePath, right.SinglePath) + root.val);
+        int MaxPath = Math.max(left.MaxPath, right.MaxPath);
+        MaxPath = Math.max(MaxPath, left.SinglePath + right.SinglePath + root.val);
+        return new ResultType(SinglePath, MaxPath);
+    }
+    
+}
