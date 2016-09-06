@@ -1,0 +1,40 @@
+public class ZigzagIterator {
+    /**
+     * @param v1 v2 two 1d vectors
+     */
+     Queue<Iterator<Integer>> q;
+    public ZigzagIterator(List<Integer> v1, List<Integer> v2) {
+        // initialize your data structure here.
+        q= new LinkedList<Iterator<Integer>>();
+        Iterator<Integer> it1 = v1.iterator();
+        Iterator<Integer> it2 = v2.iterator();
+        if(it1.hasNext()){
+            q.add(it1);
+        }
+        if(it2.hasNext()){
+            q.add(it2);
+        }
+    }
+    
+    public int next() {
+        // Write your code here
+        Iterator<Integer> it  = q.remove();
+        int res = it.next();
+        if(it.hasNext()){
+            q.add(it);
+        }
+        return res;
+    }
+
+    public boolean hasNext() {
+        // Write your code here
+        return !q.isEmpty();
+    }
+}
+
+/**
+ * Your ZigzagIterator object will be instantiated and called as such:
+ * ZigzagIterator solution = new ZigzagIterator(v1, v2);
+ * while (solution.hasNext()) result.add(solution.next());
+ * Output result
+ */
