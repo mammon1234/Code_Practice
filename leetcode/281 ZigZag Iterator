@@ -83,3 +83,44 @@ public class ZigzagIterator2 {
  * while (solution.hasNext()) result.add(solution.next());
  * Output result
  */
+//实际代码测试
+/**
+ * Created by user on 9/5/16.
+ */
+import java.util.*;
+public class Iterator_test {
+    Queue<Iterator<Integer>> q;
+    public Iterator_test(ArrayList<ArrayList<Integer>> vecs){
+        q=new LinkedList<Iterator<Integer>>();
+        for(Iterator<ArrayList<Integer>> k = vecs.iterator();k.hasNext();){
+            ArrayList<Integer> temp = (ArrayList<Integer>) k.next();
+            Iterator<Integer> temp_iter = temp.iterator();
+            if(temp_iter.hasNext()){
+                q.add(temp_iter);
+            }
+        }
+    }
+    public int next(){
+        Iterator<Integer> it = q.remove();
+        int res = it.next();
+        if(it.hasNext()){
+            q.add(it);
+        }
+        return res;
+    }
+    public boolean hasNext(){
+        return (!q.isEmpty());
+    }
+    public static void main(String[] args){
+        ArrayList<ArrayList<Integer>> l= new ArrayList<ArrayList<Integer>>();
+        l.add(new ArrayList<Integer>(Arrays.asList(1, 2, 3)));
+        l.add(new ArrayList<Integer>(Arrays.asList(4,5,6,7)));
+        l.add(new ArrayList<Integer>(Arrays.asList(8,9)));
+        StringBuffer ans= new StringBuffer();
+        Iterator_test it = new Iterator_test(l);
+        while(it.hasNext()){
+            ans.append(it.next());
+        }
+        System.out.println(ans);
+    }
+}
