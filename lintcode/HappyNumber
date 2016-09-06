@@ -1,0 +1,29 @@
+public class Solution {
+    /**
+     * @param n an integer
+     * @return true if this is a happy number or false
+     */
+    public boolean isHappy(int n) {
+        HashSet<Integer> tab = new HashSet<Integer>();
+        tab.add(n);
+        int sum = n;
+        while( sum != 1){
+            sum = trans(sum);
+            if(tab.contains(sum)){
+                return false;
+            }
+            tab.add(sum);
+        }
+        return true;
+    }
+    private int trans(int n){
+        int ans= 0;
+        while(n != 0){
+            int reminder = n%10;
+            int divid = n/10;
+            ans=ans+(int)Math.pow(reminder,2);
+            n= divid;
+        }
+        return ans;
+    }
+}
