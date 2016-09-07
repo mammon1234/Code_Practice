@@ -29,3 +29,30 @@ public class Solution {
         ans.add(root.val);
     }
 }
+//
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        LinkedList<Integer> res =new LinkedList<Integer>();
+        Stack<TreeNode> leftchild = new Stack<TreeNode>();
+        while(root != null){
+            res.addFirst(root.val);
+            if(root.left != null){
+                leftchild.push(root.left);
+            }
+            root = root.right;
+            if( root == null && !leftchild.isEmpty()){
+                root = leftchild.pop();
+            }
+        }
+        return res;
+    }
+}
