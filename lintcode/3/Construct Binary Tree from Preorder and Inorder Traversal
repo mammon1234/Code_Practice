@@ -1,0 +1,42 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+ 
+ 
+public class Solution {
+    /**
+     *@param preorder : A list of integers that preorder traversal of a tree
+     *@param inorder : A list of integers that inorder traversal of a tree
+     *@return : Root of a tree
+     */
+    int preStart = 0;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        // write your code here
+        if(preorder.length == 0 || inorder.length == 0 || preorder.length != inorder.length){
+            return null;
+        }
+        return helper(preorder, inorder,0,preorder.length-1);
+    }
+    private TreeNode helper(int[] preorder, int[] inorder, int inStart, int inEnd){
+        if(preStart >=preorder.length || inStart > inEnd) return null;
+        int index = 0;
+        for( int i = inStart; i <=inEnd; i++){
+            if(inorder[i] == preorder[preStart]){
+                index = i;
+                break;
+            }
+        }
+        TreeNode root =new TreeNode(preorder[preStart++]);
+        root.left = helper(preorder,inorder, inStart, index-1);
+        root.right = helper(preorder,inorder,index+1,inEnd);
+        return root;
+    }
+}
