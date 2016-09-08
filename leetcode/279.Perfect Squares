@@ -1,0 +1,19 @@
+public class Solution {
+    HashMap<Integer,Integer> cache = new HashMap<Integer, Integer>();
+    public int numSquares(int n) {
+        if(cache.containsKey(n)) return cache.get(n);
+        int result = n;
+        int ceiling = (int) Math.sqrt(n);
+        for(int i = ceiling; i > 0; i--){
+            int temp = numSquares( n- i*i);
+            if(temp + 1 < result){
+                result =  temp + 1;
+            }
+            if( result <= 2){
+                break;
+            }
+        }
+        cache.put(n,result);
+        return result;
+    }
+}
