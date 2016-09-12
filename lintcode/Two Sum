@@ -1,0 +1,26 @@
+public class Solution {
+    /*
+     * @param numbers : An array of Integer
+     * @param target : target = numbers[index1] + numbers[index2]
+     * @return : [index1 + 1, index2 + 1] (index1 < index2)
+     */
+    public int[] twoSum(int[] numbers, int target) {
+        // write your code here
+        int[] ans = new int[2];
+        if(numbers == null || numbers.length <2){
+            return ans;
+        }
+        Map<Integer,Integer> temp = new HashMap<Integer,Integer>();
+        for(int i= 0; i<numbers.length;i++){
+            int res = target- numbers[i];
+            if(temp.containsKey(res)){
+                ans[0] = temp.get(res)+1;
+                ans[1]= i+1;
+                break;
+            }else{
+                temp.put(numbers[i],i);
+            }
+        }
+        return ans;
+    }
+}
