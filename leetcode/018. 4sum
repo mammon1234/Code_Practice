@@ -1,0 +1,56 @@
+public class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        if(nums == null || nums.length < 4){
+            return ans;
+        }
+        Arrays.sort(nums);
+        for(int i=0; i < nums.length-3;i++){
+            if(i!=0&& nums[i]==nums[i-1]){
+                continue;
+            }
+            List<List<Integer>> res = threesum(nums, i, target-nums[i]);
+            ans.addAll(res);
+        }
+        return ans;
+    }
+    private List<List<Integer>> threesum(int[]nums, int i, int value){
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        for(int j = i+1; j<nums.length-2;j++){
+            if(j!=i+1 && nums[j]==nums[j-1]){
+                continue;
+            }
+            List<List<Integer>> res2 = twosum(nums,i,j,value-nums[j]);
+            res.addAll(res2);
+        }
+        return res;
+    }
+    private List<List<Integer>> twosum(int[]nums, int i,int j,int value2){
+        List<List<Integer>> res2 = new ArrayList<List<Integer>>();
+        for(int k = j+1; k < nums.length-1;k++){
+            if(k!=j+1 && nums[k]==nums[k-1]){
+                continue;
+            }
+            int end =  nums.length-1;
+            while(k<end){
+                int sum = nums[k]+nums[end];
+                if(sum < value2){
+                    break;
+                }
+                if(sum > value2){
+                    end--;
+                }
+                if(sum == value2){
+                    List<Integer> temp = new ArrayList<Integer>();
+                    temp.add(nums[i]);
+                    temp.add(nums[j]);
+                    temp.add(nums[k]);
+                    temp.add(nums[end]);
+                    res2.add(temp);
+                    break;
+                }
+            }
+        }
+        return res2;
+    }
+}
