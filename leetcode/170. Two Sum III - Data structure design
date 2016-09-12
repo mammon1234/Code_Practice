@@ -1,1 +1,39 @@
 
+public class TwoSum {
+    //用hashmap快速检索
+    private final Map<Integer, Integer> hm = new HashMap<Integer, Integer>();
+    //用linkedlist快速遍历，因为hashmap的iterator很慢
+    private final List<Integer> ls = new LinkedList<Integer>();
+    // Add the number to an internal data structure.
+	public void add(int number) {
+	    ls.add(number);
+	    if(!hm.containsKey(number)){
+	        hm.put(number,1);
+	    }else{
+	        hm.put(number, hm.get(number)+1);
+	    }
+	}
+
+    // Find if there exists any pair of numbers which sum is equal to the value.
+	public boolean find(int value) {
+	    if(ls == null || ls.size() <2){
+	        return false;
+	    }
+	    for(int curValue : ls){
+	        int target = value - curValue;
+	        if(hm.containsKey(target)){
+	        //注意，相同数时总的次数要大于2才能算成功
+	            if((target == curValue && hm.get(target) >=2)||(target != curValue)){
+	                return true;
+	            }
+	        }
+	    }
+	    return false;
+	}
+}
+
+
+// Your TwoSum object will be instantiated and called as such:
+// TwoSum twoSum = new TwoSum();
+// twoSum.add(number);
+// twoSum.find(value);
