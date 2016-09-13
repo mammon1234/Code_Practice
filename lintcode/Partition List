@@ -1,0 +1,41 @@
+/**
+ * Definition for ListNode.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int val) {
+ *         this.val = val;
+ *         this.next = null;
+ *     }
+ * }
+ */ 
+public class Solution {
+    /**
+     * @param head: The first node of linked list.
+     * @param x: an integer
+     * @return: a ListNode 
+     */
+    public ListNode partition(ListNode head, int x) {
+        // write your code here
+        if(head == null){
+            return null;
+        }
+        ListNode smalldummy = new ListNode(0);
+        ListNode bigdummy = new ListNode(0);
+        ListNode small = smalldummy;
+        ListNode big  = bigdummy;
+        while(head != null){
+            if(head.val < x){
+                small.next = head;
+                small = head;
+            }else{
+                big.next = head;
+                big = head;
+            }
+            head = head.next;
+        }
+        big.next = null;
+        small.next = bigdummy.next;
+        return smalldummy.next;
+    }
+}
