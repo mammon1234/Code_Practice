@@ -5,10 +5,12 @@ public class Solution {
         }
         int left = 0,right = nums.length-1;
         int pointer = 0;
+        //注意边界条件之一，右边界也要考虑
         while(pointer <= right){
             if(nums[pointer]==0){
                 swap(nums,left,pointer);
                 left++;
+                //左侧已然有序，直接+1
                 pointer++;
             }else if(nums[pointer] == 2){
                 swap(nums, pointer,right);
