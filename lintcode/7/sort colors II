@@ -1,0 +1,48 @@
+class Solution {
+    /**
+     * @param colors: A list of integer
+     * @param k: An integer
+     * @return: nothing
+     */
+    public void sortColors2(int[] colors, int k) {
+        // write your code here
+        if(colors == null || colors.length <1){
+            return;
+        }
+        int start = 0, end = colors.length-1;
+        int count=0;
+
+        while(count < k){
+        //必须每次更新min，max初值。否则无法得到下一轮min，max值
+            int min = Integer.MAX_VALUE;
+            int max = Integer.MIN_VALUE;
+            for(int i = start; i<=end;i++){
+                min= Math.min(min,colors[i]);
+                max= Math.max(max,colors[i]);
+            }
+            int left = start;
+            int right = end;
+            int cur = left;
+            while(cur<=right){
+                if(colors[cur] == min){
+                    swap(colors, cur, left);
+                    left++;
+                    cur++;
+                }else if(colors[cur] == max){
+                    swap(colors,cur,right);
+                    right--;
+                }else{
+                    cur++;
+                }
+            }
+            count+=2;
+            start = left;
+            end =right;
+        }
+    }
+    private void swap(int[] colors, int left, int right){
+        int temp = colors[left];
+        colors[left] = colors[right];
+        colors[right] = temp;
+    }
+}
