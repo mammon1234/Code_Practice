@@ -25,4 +25,12 @@ public class Solution {
         nums[left] = nums[right];
         nums[right] = temp;
     }
+    //使用异或表达式,来交换位置
+    private void swap2(int[] nums,int left, int right){
+        if(nums[left]!=nums[right]){
+            nums[left]^=nums[right];
+            nums[right]^=nums[left];
+            nums[left]^=nums[right];
+        }
+    }
 }
