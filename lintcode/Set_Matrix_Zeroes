@@ -18,16 +18,9 @@ public class Solution {
                 }
             }
         }
-        for(int i = 0; i<rows.length;i++){
-            if(rows[i] == 1){
-                for(int j =0; j<columns.length;j++){
-                    matrix[i][j]=0;
-                }
-            }
-        }
-        for(int j = 0; j<columns.length;j++){
-            if(columns[j] == 1){
-                for(int i =0; i<rows.length;i++){
+        for(int i=0; i<matrix.length;i++){
+            for(int j=0; j<matrix[0].length;j++){
+                if(rows[i]==1 ||columns[j] == 1){
                     matrix[i][j]=0;
                 }
             }
