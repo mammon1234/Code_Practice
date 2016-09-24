@@ -7,7 +7,7 @@ public class Solution {
         HashSet<Character> hs = new HashSet<Character>();
         for(int i=0; i<s.length(); i++){
             Character c = s.charAt(i);
-            if(97 <= (int)c || (int)c <= 122){
+            if(97 <= (int)c && (int)c <= 122){
                 if(hs.contains(c)){
                     hs.remove(c);
                 }else{
