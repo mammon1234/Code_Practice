@@ -1,0 +1,11 @@
+//Implement a function void reverse(char* str), which reverses a null terminated string.
+String reverse(String s){
+	StringBuffer res=new StringBuffer();
+	if(s==null||s.length()==0){
+	  return "";
+	}
+	for(int i=s.length()-1;i>=0;i--){
+	  res.append(s.charAt(i));
+	}
+	return res.toString();
+}
