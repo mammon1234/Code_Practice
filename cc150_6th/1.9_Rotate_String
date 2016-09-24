@@ -1,0 +1,23 @@
+public boolean stringRotation(String str1, String str2){
+	if(str1.length() != str2.length()){
+		return false;
+	}
+	String s1s1 = str1+str1;
+	return isSubstring(s1s1,str2);
+}
+
+private boolean isSubstring(String s1, String s2){
+	int len1 = s1.length();
+	int len2 = s2.length();
+	for(int i =0; i<=len1-len2;i++){
+		for(int j = 0; j < len2;j++){
+			if(s1.charAt(i+j) != s2.charAt(j)){
+				break;
+			}
+			if(j == len2-1){
+				return true;
+			}
+		}
+	}
+	return false;
+}
