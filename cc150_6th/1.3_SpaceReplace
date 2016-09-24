@@ -1,3 +1,4 @@
+//事先计算好总共的新长度，时间花费O(2n),newlength事实上遍历中的指示，
 public void replace(char[] source, int length){
 	int spaceCount = 0;
 	for(int i = 0; i < length; i++){
