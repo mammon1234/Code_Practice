@@ -1,0 +1,48 @@
+public class Solution {
+    public int romanToInt(String s) {
+        if(s == null || s.length() ==0){
+            return 0;
+        }
+        char[] nums = s.toCharArray();
+        int sum=0,pre=0,cur=0;
+        for(int i =0; i< nums.length;i++){
+            cur=numChange(nums[i]);
+            if(pre < cur){
+                sum=sum+cur-2*pre;
+            }else{
+                sum=sum+cur;
+            }
+            pre =cur;
+        }
+        return sum;
+    }
+    private int numChange(char num){
+        int ans = 0;
+        switch(num){
+            case 'I':
+                ans =1;
+                break;
+            case 'V':
+                ans = 5;
+                break;
+            case 'X':
+                ans= 10;
+                break;
+            case 'L':
+                ans = 50;
+                break;
+            case 'C':
+                ans = 100;
+                break;
+            case 'D':
+                ans = 500;
+                break;
+            case 'M':
+                ans = 1000;
+                break;
+            default:
+                break;
+        }
+        return ans;
+    }
+}
