@@ -1,0 +1,155 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if(head == null || head.next == null){
+            return true;
+        }
+        ListNode newhead = reverse(head);
+        while(head!= null){
+            if(head.val != newhead.val){
+                return false;
+            }
+            head=head.next;
+            newhead = newhead.next;
+        }
+        return true;
+    }
+    private ListNode reverse(ListNode head){
+        ListNode dummy = null;
+        while(head != null){
+            ListNode temp = new ListNode(head.val);
+            temp.next=dummy;
+            dummy= temp;
+            head=head.next;
+        }
+        return dummy;
+    }
+}
+//加入快行指针，需要在循环结束再判断一次
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if(head == null || head.next == null){
+            return true;
+        }
+        ListNode newhead = reverse(head);
+        ListNode fast = head.next;
+        while(fast!= null && fast.next != null){
+            if(head.val != newhead.val){
+                return false;
+            }
+            head=head.next;
+            newhead = newhead.next;
+            fast = fast.next.next;
+        }
+        if(head.val != newhead.val){
+            return false;
+        }
+        return true;
+    }
+    private ListNode reverse(ListNode head){
+        ListNode dummy = null;
+        while(head != null){
+            ListNode temp = new ListNode(head.val);
+            temp.next=dummy;
+            dummy= temp;
+            head=head.next;
+        }
+        return dummy;
+    }
+}
+//stack。快行指针储存一半list数据
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if(head == null || head.next == null){
+            return true;
+        }
+        Stack<Integer> save = new Stack<Integer>();
+        ListNode fast = head.next;
+        while(fast != null && fast.next != null){
+            save.push(head.val);
+            head = head.next;
+            fast = fast.next.next;
+        }
+        if(fast != null){
+            save.push(head.val);
+        }
+        head = head.next;
+        while(head != null){
+            int pre = save.pop();
+            if(head.val != pre){
+                return false;
+            }
+            head = head.next;
+        }
+        return true;
+    }
+}
+//Recursion
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    class res{
+        ListNode dummy = null;
+    }
+    public boolean isPalindrome(ListNode head) {
+        if(head == null || head.next == null){
+            return true;
+        }
+        res du = new res();
+        int len = length(head);
+        return recurse(head,len, du);
+        
+    }
+    private int length(ListNode head){
+        int len = 0;
+        while(head!=null){
+            len++;
+            head=head.next;
+        }
+        return len;
+    }
+    private boolean recurse(ListNode cur, int length, res du){
+        if(length == 2){
+            du.dummy = cur.next;
+            return cur.val == du.dummy.val;
+        }
+        if(length ==1){
+            du.dummy = cur;
+            return true;
+        }
+        if(recurse(cur.next, length-2, du)){
+            du.dummy = du.dummy.next;
+            return cur.val == du.dummy.val;
+        }
+        return false;
+    }
+}
