@@ -55,3 +55,55 @@ public class Solution {
         return dummy.next;
     }
 }
+//follow up 倒序排列
+public ListNode add(ListNode h1, ListNode h2){
+	if(h1 == null){
+		return h2;
+	}
+	if(h2 == null){
+		return h1;
+	}
+	Stack<Integer> s1 = new Stack<Integer>();
+	Stack<Integer> s2 = new Stack<integer>();
+	while(h1!= null){
+		s1.push(h1.val);
+		h1=h1.next;
+	}
+	while(h2!= null){
+		s2.push(h2.val);
+		h2=h2.next;
+	}
+	int div =0,mod = 0,v1=0,v2=0;
+	ListNode dummy = null;
+	while(!s1.isEmpty() && !s2.isEmpty()){
+		v1= s1.pop();
+		v2 = s2.pop();
+		mod = (v1+v2+div)%10;
+		div = (v1+v2+div)/10;
+		ListNode temp = new ListNode(mod);
+		temp.next = dummy;
+		dummy= temp;
+	}
+	while(!s1.isEmpty()){
+		v1= s1.pop();
+		mod = (v1+div)%10;
+		div = (v1+div)/10;
+		ListNode temp = new ListNode(mod);
+		temp.next = dummy;
+		dummy= temp;
+	}
+	while(!s2.isEmpty()){
+		v2= s2.pop();
+		mod = (v2+div)%10;
+		div = (v2+div)/10;
+		ListNode temp = new ListNode(mod);
+		temp.next = dummy;
+		dummy= temp;
+	}
+	if(div != 0){
+		ListNode temp = new ListNode(div);
+		temp.next = dummy;
+		dummy= temp;
+	}
+	return dummy;
+}
