@@ -14,3 +14,22 @@ public void deleteDups(LinkedListNode head){
 		cur = cur.next;
 	}
 }
+
+//without extra space
+public void deleteDups(LinkedListNode head){
+	if(head == null || head.next == null){
+		return;
+	}
+	LinkedListNode cur = head;
+	while(cur!= null){
+		LinkedListNode runner = cur;
+		while(runner.next != null){
+			if(runner.next.value == cur.value){
+				runner.next = runner.next.next;
+			}else{
+				runner= runner.next;
+			}
+		}
+		cur = cur.next;
+	}
+}
