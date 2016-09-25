@@ -1,0 +1,16 @@
+public void deleteDups(LinkedListNode head){
+	if(head == null || head.next == null){
+		return;
+	}
+	HashSet<Integer> hs = new HashSet<Integer>();
+	LinkedListNode previous = null;
+	LinkedListNode cur = head
+	while(cur!= null){
+		if(!hs.add(cur.value)){
+			privious.next = cur.next;
+		}else{
+			privious = cur;
+		}
+		cur = cur.next;
+	}
+}
