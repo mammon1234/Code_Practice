@@ -1,3 +1,4 @@
+//Iteration
 public class Solution {
     public boolean isHappy(int n) {
         HashSet<Integer> tab = new HashSet<Integer>();
@@ -21,5 +22,34 @@ public class Solution {
             n= divid;
         }
         return ans;
+    }
+}
+
+
+//Recursion
+public class Solution {
+    HashMap<Integer, Boolean> hm;
+    Solution(){
+        hm=new HashMap<Integer,Boolean>();
+        hm.put(1,true);
+    }
+    public boolean isHappy(int n) {
+        if(hm.containsKey(n)){
+            return hm.get(n);
+        }
+        hm.put(n,false);
+        boolean result = isHappy(transform(n));
+        if(result){
+            hm.put(n,result);
+        }
+        return result;
+    }
+    public int transform(int n){
+        int res = 0;
+        while(n!=0){
+            res+=(n%10)*(n%10);
+            n=n/10;
+        }
+        return res;
     }
 }
