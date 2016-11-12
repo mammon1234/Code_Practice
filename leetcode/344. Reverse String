@@ -1,0 +1,8 @@
+public class Solution {
+    public String reverseString(String s) {
+        StringBuilder ss = new StringBuilder();
+        ss.append(s);
+        String res = ss.reverse().toString();
+        return res;
+    }
+}
