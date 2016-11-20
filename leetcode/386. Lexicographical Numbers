@@ -1,0 +1,16 @@
+//recursive
+public class Solution {
+    private List<Integer> res;
+    private int n;
+    public List<Integer> lexicalOrder(int n) {
+        this.res = new ArrayList<Integer>();
+        this.n = n;
+        helper(1);
+        return res;
+    }
+    private void helper(int m){
+        res.add(m);
+        if(m*10 <= n) helper(m*10);
+        if(m < n && m%10 <9) helper(m+1);
+    }
+}
