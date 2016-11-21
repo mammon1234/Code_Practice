@@ -1,0 +1,44 @@
+public class Solution {
+    public int lengthLongestPath(String input) {
+        if(input == null ||input.length()==0) return 0;
+        String[] res = input.split("\\n");
+        HashMap<Integer,Integer> store =new HashMap<Integer,Integer>();
+        store.put(0,0);
+        Integer maxlen=0;
+        Integer pathlen =0;
+        for(int i=0;i<res.length;i++){
+            Integer tmp[]= ans(res[i]);
+            Integer dep = tmp[0];
+            Integer len = tmp[1];
+            Integer endflag =tmp[2];
+            if(endflag == 1){
+                maxlen=max(maxlen,store.get(dep)+len);
+            }else{
+                store.put(dep+1,store.get(dep)+len+1);
+            }
+        }
+        return maxlen;
+        
+    }
+    private Integer[] ans(String args){
+        Integer[] res= new Integer[3];
+        Integer dep = 0;
+        Integer len=args.length();
+        Integer endflag = 0;
+        for(int i=0;i<args.length();i++){
+            if(args.charAt(i)=='\t'){
+                dep+=1;
+            }
+            if(args.charAt(i)=='.'){
+                endflag=1;
+            }
+        }
+        res[0]=dep;
+        res[1]=len-dep;
+        res[2]=endflag;
+        return res;
+    }
+    private Integer max(Integer a,Integer b){
+        return a >= b ? a : b;
+    }
+}
