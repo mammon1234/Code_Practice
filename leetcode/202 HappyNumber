@@ -1,5 +1,5 @@
+Math Hashtable
 //Iteration
-
 public class Solution {
     public boolean isHappy(int n) {
         HashSet<Integer> hs = new HashSet<Integer>();
@@ -26,10 +26,32 @@ public class Solution {
 
 
 //Recursion
+
 public class Solution {
-    HashMap<Integer, Boolean> hm;
+    HashSet<Integer> hs;
     Solution(){
-        hm=new HashMap<Integer,Boolean>();
+        hs = new HashSet<Integer>();
+    }
+    public boolean isHappy(int n) {
+        if(n ==1) return true;
+        if(!hs.add(n)) return false;
+        return isHappy(trans(n));
+    }
+    private int trans(int n){
+        int sum = 0;
+        while(n != 0){
+            int res= n%10;
+            sum+=res*res;
+            n=n/10;
+        }
+        return sum;
+    }
+}
+
+public class Solution {
+    HashMap<Integer,Boolean> hm;
+    Solution(){
+        hm = new HashMap<Integer,Boolean>();
         hm.put(1,true);
     }
     public boolean isHappy(int n) {
@@ -37,18 +59,17 @@ public class Solution {
             return hm.get(n);
         }
         hm.put(n,false);
-        boolean result = isHappy(transform(n));
-        if(result){
-            hm.put(n,result);
-        }
-        return result;
+        boolean alter = isHappy(trans(n));
+        if(alter) hm.put(n,alter);
+        return alter;
     }
-    public int transform(int n){
-        int res = 0;
-        while(n!=0){
-            res+=(n%10)*(n%10);
+    private int trans(int n){
+        int sum = 0;
+        while(n != 0){
+            int res= n%10;
+            sum+=res*res;
             n=n/10;
         }
-        return res;
+        return sum;
     }
 }
