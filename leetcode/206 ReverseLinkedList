@@ -1,3 +1,4 @@
+//recursive
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -8,18 +9,16 @@
  */
 public class Solution {
     public ListNode reverseList(ListNode head) {
-        if( head == null || head.next == null){
-            return head;
-        }
-        ListNode after = head.next;
-        head.next = null;
-        ListNode pre = reverseList(after);
-        after.next = head;
-        return pre;
+        if(head ==null || head.next == null) return head;
+        ListNode newhead = reverseList(head.next);
+        head.next.next=head;
+        head.next=null;
+        return newhead;
+        
     }
 }
 
-//
+//Iteritative
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -30,18 +29,16 @@ public class Solution {
  */
 public class Solution {
     public ListNode reverseList(ListNode head) {
-        if( head == null || head.next == null){
-            return head;
+        if(head ==null || head.next == null) return head;
+        ListNode after = head.next;
+        ListNode pre =null;
+        while(after !=null){
+            head.next = pre;
+            pre = head;
+            head = after;
+            after = head.next;
         }
-        ListNode prev = null;
-        ListNode curr = head;
-        while(head.next != null){
-            head = head.next;
-            curr.next = prev;
-            prev= curr;
-            curr = head;
-        }
-        head.next = prev;
+        head.next = pre;
         return head;
     }
 }
