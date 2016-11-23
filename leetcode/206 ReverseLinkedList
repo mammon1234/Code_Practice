@@ -1,4 +1,4 @@
-//recursive
+//LinkedList
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -7,6 +7,7 @@
  *     ListNode(int x) { val = x; }
  * }
  */
+//recursive
 public class Solution {
     public ListNode reverseList(ListNode head) {
         if(head ==null || head.next == null) return head;
@@ -19,14 +20,6 @@ public class Solution {
 }
 
 //Iteritative
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
 public class Solution {
     public ListNode reverseList(ListNode head) {
         if(head ==null || head.next == null) return head;
