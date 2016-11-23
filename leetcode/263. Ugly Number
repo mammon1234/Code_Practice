@@ -1,0 +1,17 @@
+//Math
+public class Solution {
+    public boolean isUgly(int num) {
+        if(num <= 0) return false;
+        num = trans(num,2);
+        num = trans(num,3);
+        num = trans(num,5);
+        return num == 1?true:false;
+    }
+    
+    private int trans(int num,int factor){
+        while(num % factor == 0){
+            num=num / factor;
+        }
+        return num;
+    }
+}
