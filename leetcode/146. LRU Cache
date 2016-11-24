@@ -51,6 +51,7 @@ public class LRUCache {
                 map.remove(head.next.key);
                 detach(head.next);
             }
+            //node要重新赋值
             node = new Node(key,value);
             map.put(key,node);
             attach(node);
