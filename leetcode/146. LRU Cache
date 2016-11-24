@@ -1,0 +1,78 @@
+//用双链表和 HashMap 实现，链表的作用是记录节点的使用顺序。正常情况下 LRU 都是用这种做法的。
+//HashMap 实现用 key 找到 List 中的节点对象，找不到就在 List 中增加节点，并插入 HashMap。
+//按照要求得到或修改节点的 value。修改节点的使用时间，也就是把 List 中的节点拉到 List 头部。
+//在第一步时如果节点个数大于可用容量，就将 List 的最后一个节点删去。
+//design
+public class LRUCache {
+    class Node{
+        Integer key;
+        Integer value;
+        Node prev;
+        Node next;
+        
+        Node(Integer key, Integer value){
+            this.key =key;
+            this.value =value;
+            prev =null;
+            next =null;
+        }
+    }
+    private HashMap<Integer, Node> map;
+    private int capacity;
+    private Node head;
+    private Node tail;
+    
+    public LRUCache(int capacity) {
+        map = new HashMap<Integer, Node>();
+        this.capacity = capacity;
+        head =new Node(null,null);
+        tail =new Node(null,null);
+        head.prev = tail;
+        head.next = tail;
+        tail.prev= head;
+        tail.next =head;
+    }
+    
+    public int get(int key) {
+        Node node = map.get(key);
+        if(node != null){
+            //update frequency
+            detach(node);
+            attach(node);
+        }
+        
+        return node == null? -1:node.value;
+    }
+    
+    public void set(int key, int value) {
+        Node node = map.get(key);
+        if(node == null){
+            if(map.size() == capacity){
+                map.remove(head.next.key);
+                detach(head.next);
+            }
+            node = new Node(key,value);
+            map.put(key,node);
+            attach(node);
+        }else{
+            node.value = value;
+            detach(node);
+            attach(node);
+        }
+    }
+    
+    void detach(Node node){
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+        node.prev =null;
+        node.next =null;
+    }
+    
+    void attach(Node node){
+        node.next =tail;
+        node.prev =tail.prev;
+        tail.prev.next = node;
+        tail.prev= node;
+    }
+    
+}
