@@ -1,1 +1,36 @@
+//Hashing
+==>Build Index
+
+Object ---> Number (hash code)
+
+//hashcode
+
+publci class Object{
+	//native 表示 函数实现不是用Java，而是用更底层的语言C之类的
+	//返回的hashcode对应的是内存地址
+	public native int hashCode();
+
+	public String toString(){
+		return getClass().getName() + "@" + Integer.toHexString(hashCode());
+	}
+}
+
+//Object to hashcode
+多对一 many to one
+即不同的object可以有一样的hashcode，
+但有一样的hashcode不一定是一样的object
+//hashcode design 3 principles
+1.Same code for repeated calling in same application
+2. equal => Same hash code
+3. Same hash code !=> Equals, 但是能实现一对一是最好的
+
+//Hashtable
+
+Searching an element in an array needs__time complexity
+Unsorted array:O(n)
+Sorted array: o(log n)
+
+//Hash Table
+Mapping: hashCode => arrayIndex
+arrayIndex = hashCode % length
 
