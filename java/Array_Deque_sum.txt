@@ -33,3 +33,16 @@ AddLast:O(1) Amortized
 RemoveFirst:O(1)
 RemoveLast:O(1)
 Set:O(1)
+
+//初始化是，如果能预估大小的话，能减少resize的时间
+Queue<Integer> queue = new ArrayDeque<Integer>();
+Queue<Integer> queue = new ArrayDeque<Integer>(1000);
+
+Deque<Integer> stack = new ArrayDeque<Integer>(1000):
+
+
+//各版本,Stack较早，考虑多线程，锁，所以通常情况下Stack运行较慢
+Stack(Vector) 1.0
+ArrayList 	1.2
+LinkedList 	1.2
+ArrayDeque 	1.6

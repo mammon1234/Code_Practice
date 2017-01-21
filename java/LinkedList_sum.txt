@@ -39,4 +39,11 @@ private static class Node<E>{
 8 bytes		X bytes		8 bytes
 last node 	element 	next node
 
+//Linkedlist Dynamic Data Structure
+Access:O(n)
+AddFirst:O(1)
+AddLast:O(1)
+RemoveFirst:O(1)
+RemoveLast:O(1)
+Set:O(n)
 

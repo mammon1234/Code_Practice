@@ -67,3 +67,6 @@ AddLast:O(1)  Amortized!!!!
 RemoveFirst: O(n) (no holes )
 RemoveLast: O(1) //不涉及resize问题
 Set: O(1)
+
+//理由同ArrayDeque初始化
+List<Integer> list = new ArrayList<Integer>(1000);

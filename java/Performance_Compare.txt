@@ -1,5 +1,7 @@
-			ArrayList	ArrayDeque
-AddFirst	O(N)		O(1) Am
-AddLast		O(1) Am		O(1) Am
-RemoveFirst	O(N)		O(1)
-RemoveLast	O(1)		O(1)
+			ArrayList	Linked List 	ArrayDeque
+Random AccessO(1)			O(n)		未开放随机访问接口
+AddFirst	O(N)			O(1)			O(1) Am
+AddLast		O(1) Am		O(1)				O(1) Am
+RemoveFirst	O(N)		O(1)				O(1)
+RemoveLast	O(1)		O(1)				O(1)
+Set			O(1)		O(n)				O(1)
