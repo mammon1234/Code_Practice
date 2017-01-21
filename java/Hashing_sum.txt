@@ -33,4 +33,8 @@ Sorted array: o(log n)
 //Hash Table
 Mapping: hashCode => arrayIndex
 arrayIndex = hashCode % length
+//Linear probing
+发生Collision，线性向后将value放入空格中
 
+//Rehashing
+空间填满时，resize整个Array
