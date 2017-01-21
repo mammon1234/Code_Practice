@@ -1,1 +1,42 @@
+LinkedList
+
+addFirst(object)
+addLast(object)
+getFirst()
+getLast()
+removeFirst()
+removelast()
+
+import java.util.LinkedList;
+LinkedList<Integer> a = new LinkedList<>();
+a.add(1);
+a.add(2);
+//remove(object)
+a.remove(new Integer(2));
+System.out.println(a);
+System.out.println(a.size());
+
+//Nested Class:Node Why static?
+//使得Node class不能访问外部的任何一个元素
+publci class Linkedlist<E> extends .. {
+	Node<E> first;
+	Node<E> last;
+}
+
+private static class Node<E>{
+	E item;
+	Node<E> next;
+	Node<E> prev;
+
+	Node(Node<E> prev, E element, Node<E> next){
+		this.element = element;
+		this.next = next;
+		this.prev = prev;
+	} 
+}
+
+//64位系统的电脑中，linkedlist结构为
+8 bytes		X bytes		8 bytes
+last node 	element 	next node
+
 
