@@ -24,17 +24,24 @@ publci class Object{
 2. equal => Same hash code
 3. Same hash code !=> Equals, 但是能实现一对一是最好的
 
-//Hashtable
-
 Searching an element in an array needs__time complexity
 Unsorted array:O(n)
 Sorted array: o(log n)
 
+//Hashtable Use hashcode and array length to get index of array
+
 //Hash Table
 Mapping: hashCode => arrayIndex
 arrayIndex = hashCode % length
-//Linear probing
-发生Collision，线性向后将value放入空格中
 
 //Rehashing
-空间填满时，resize整个Array
+空间填充至某个阈值后，resize整个Array
+Load Factor = Number of entries / length
+
+//Linear probing
+发生Collision，线性向后将value放入空格中
+//Separate Chain
+发生Collision，相应位置生成一个链表来储存对应元素
+
+Near O(1) search time complexity
+Near O(1)  to add a new element
