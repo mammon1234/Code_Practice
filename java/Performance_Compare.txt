@@ -1,1 +1,5 @@
-
+			ArrayList	ArrayDeque
+AddFirst	O(N)		O(1) Am
+AddLast		O(1) Am		O(1) Am
+RemoveFirst	O(N)		O(1)
+RemoveLast	O(1)		O(1)

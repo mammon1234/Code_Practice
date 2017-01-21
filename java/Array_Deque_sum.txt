@@ -28,7 +28,7 @@ tail=(head-1+length)%length == (head-1+length)&(length-1)
 
 //Time comlexity
 Access:o(1)
-AddFirst:O(1)
+AddFirst:O(1) Amortized
 AddLast:O(1) Amortized
 RemoveFirst:O(1)
 RemoveLast:O(1)
