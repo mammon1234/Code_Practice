@@ -1,0 +1,25 @@
+//Java 8 新feature,	可实现的方法(default)
+Java 8 - Default Methods
+
+interface person{
+	String getName();
+
+	default String greeting(){
+		return String.format("Hello, I am %s", getName());
+	}
+}
+
+public class Emplyee implements Person{
+	private String name;
+	private int age;
+
+	public Employee(String name, int age){
+		this.name = name;
+		this.age = age;
+	}
+
+	@Override
+	public String getName(){
+		return name;
+	}
+}

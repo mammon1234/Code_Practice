@@ -24,7 +24,7 @@ elementData.length:16
 //在length为2^n的情况下，addLast
 tail=(tail+1)%length == (tail+1)&(length-1)
 //在length为2^n的情况下，addFirst
-tail=(head-1+length)%length == (head-1+length)&(length-1)
+tail=(head-1+length)%length == (head-1)&(length-1)
 
 //Time comlexity
 Access:o(1)

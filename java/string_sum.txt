@@ -1,0 +1,15 @@
+String
+//两种初始化方法，第二种较好。因为指向java的value pool里面的variable，如果value一样，那么指向相同
+//在循环方法中，第一种会不断产生新的参数，而会占用更多内存空间
+String str = new String();
+String str = "";
+
+public final class String
+	implements java .io.Serializable, Comparable<String>, CharSequence {
+
+	private final char value[];
+
+	public String(){
+		this.value = new char[0];
+	}
+}
