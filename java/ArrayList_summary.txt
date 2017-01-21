@@ -1,0 +1,69 @@
+Q1: String 不能被modified
+Q2: Array为1.5X 增长
+Q3:Interface 在Java 8里面可以有method implementation(default method)
+
+ArrayList : Resizable array implementation
+
+add(object)
+add(index,object)
+get(index)
+set(index,object)
+remove(index)
+size()
+
+import java.util.ArrayList;
+
+//Java 1.6之后因为genetic 特性，后一个<>内不用声明类型
+ArrayList<Integer> a = new arrayList<>();
+
+a.add(1);
+a.add(2);
+a.remove(0);
+System.out.println(a);
+System.out.println(a.size());
+
+//初始化
+size:0
+elementData.length:0
+
+//开始赋值
+size:1
+elementData.length:10
+
+//1.5倍扩张,使用位运算扩张，运算效果拔群
+int old Capacity = elementData.length;
+int new Capacity = oldCapacity + (oldCapacity >> 1);
+
+//二分
+// int mid = (low + high) >>> 1;
+//区分>>和>>>
+// >>> 右移用0来补充，不影响符号位>> 右移用原有位来补充
+
+// 1, x ,x^2, x^3, x^4,...,
+//例如从x^2 到x^3时，前面的1,x空间已被garbage collection回收掉。
+//基于内存空间的有效利用，我们希望1+x=x^3 
+//x= 1.32
+//同理1+x+x^2 = x^4 =>  x=1.47
+//1+x+x^2+...+x^(n-2) = x^n => x=1.618
+//计算机底层忧郁浮点数表示比较麻烦，取近似值1.5
+
+// ArrayList remove操作
+public E remove(int index){
+  rangeCheck(index);
+  modCount++;
+  E oldValue = elemntData(index);
+  
+  int numMOved = size - index -1;
+  if(numMoved > 0)
+    System.arraycopy(elementData,index+1,elementData, index, numMoved);
+  elementData[--size] = null;
+  return oldValue;
+}
+
+//ArrayList time complexity
+Access: O(1)
+AddFirst:O(n)
+AddLast:O(1)  Amortized!!!!
+RemoveFirst: O(n) (no holes )
+RemoveLast: O(1) //不涉及resize问题
+Set: O(1)

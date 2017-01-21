@@ -1,4 +1,0 @@
-Q1: String 不能被modified
-Q2: Array为1.5X 增长
-ArrayList
-初始化
