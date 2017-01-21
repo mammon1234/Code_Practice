@@ -1,1 +1,35 @@
+ArrayDeque
+//2X增长， resizable circular queue
 addFirst(object)
+addLast(object)
+getFirst()
+getLast()
+removeFirst()
+removeLast()
+
+import java.util.ArrayDeque;
+
+ArrayDeque<Integer> a = new ArrayDeque<>();
+a.add(1);
+a.add(2);
+a.removeFirst();
+System.out.println(a);
+System.out.println(a.size());
+
+//初始化,添加元素，当head = tail 时，2X增长
+tail:0
+head:0
+elementData.length:16
+
+//在length为2^n的情况下，addLast
+tail=(tail+1)%length == (tail+1)&(length-1)
+//在length为2^n的情况下，addFirst
+tail=(head-1+length)%length == (head-1+length)&(length-1)
+
+//Time comlexity
+Access:o(1)
+AddFirst:O(1)
+AddLast:O(1) Amortized
+RemoveFirst:O(1)
+RemoveLast:O(1)
+Set:O(1)
