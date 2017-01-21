@@ -8,3 +8,4 @@ Rabin Karp Substring 就比KMP算法更容易讲通 时间复杂度也是O(M+N)
 3.了解一些信息
 4.哪些公司有题库，哪些公司喜欢system design， 哪些公司coding no bug 面试公司模拟
 5.利用所有的资源，找内推。
+6.自信，坚定，热情的心态。positive
