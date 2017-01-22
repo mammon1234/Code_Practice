@@ -1,0 +1,69 @@
+//Heap
+//Almost complete tree  //complete tree : # of node = 2^n -1 
+
+Each Level must have maximum number of nodes
+Bottom level could be an exception
+Filled from left to right on each level
+
+//Largest/smallest data is the root
+//Children always smaller/greater than parent
+
+use Array to store data
+
+left = parent*2+1;
+right = left +1
+
+
+Priority Queue
+
+Public class PriorityQueue<E> extends AbstractQueue<E>
+	implements java.io.Serializable{
+	private static final int DEFAULT_INITIAL_CAPACITY =11;
+
+	transient Object[] queue;
+	private int size = 0;
+	private final Comparator<? super E> comparator;
+
+	transient int modCount = 0;
+}
+
+public boolean offer(E e){
+	if( e == null)
+		throw new NullPointerException();
+	 modCount++;
+	 int i = size;
+	 if(i >= queue.length)
+	 //size较小时为2X，size较大时用1.5X增长
+	 	grow(i+1);
+	 size = i+1;
+	 if( i==0)
+	 	queue[0] =e;
+	 else
+	  siftUp(i,e);
+	 return true;
+}
+
+private void siftUpcomparable(int k, E x){
+	Comparable<? super E> key = (Comparable<? super E>) x;
+	while(k>0){
+		int parent = (k-1) >>>1;
+		Object e = queue[parent];
+		if(key.compareTo((E) e) >=0)
+			break;
+		queue[k] = e;
+		k = parent;
+	}
+	queue[k] =key;
+}
+
+//Top K numbers
+//default为minheap，
+PriorityQueue<Integer> maxheap = new PriorityQueue<Integer>(k,comparator);
+for(int i:nums){
+	maxheap.add(i);
+}
+int [] result = new int[k];
+for(int i =0;i<result.length;i++){
+	result[i] = maxheap.poll();
+}
+return result;
