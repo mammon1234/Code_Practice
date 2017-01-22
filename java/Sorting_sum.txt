@@ -96,3 +96,59 @@ for(int i = destLow, p = low, q = mid; i < destHigh; i++) {
 ● Merge Sort
 ● Binary Search
 ● Priority Queue
+
+
+Sorting in Java
+Collections.sort()
+Arrays.sort();
+
+//Collections.sort() 调用的是list.sort
+public static <T extends Comparable<? super T>> void sort(List<T> list) {
+list.sort(null);
+}
+
+//ArrayList sort() 调用的是arrays.sort
+@Override
+@SuppressWarnings("unchecked")
+public void sort(Comparator<? super E> c) {
+	final int expectedModCount = modCount;
+	Arrays.sort((E[]) elementData, 0, size, c);
+	if (modCount != expectedModCount) {
+		throw new ConcurrentModificationException();
+	}
+	modCount++;
+}
+
+//List sort() -- LinkedList use it!先转成array再用arrays.sort
+default void sort(Comparator<? super E> c) {
+	Object[] a = this.toArray();	
+	Arrays.sort(a, (Comparator) c);
+	ListIterator<E> i = this.listIterator();
+	for (Object e : a) {
+	i.next();
+	i.set((E) e);
+	}
+}
+
+//Arrays.sort的具体调用方法至少在Java1.6
+● Primitive Value Array: Tuned Quick Sort
+● Object Array: Merge Sort (Why?) 比如大写的Integer之类的
+● Insertion Sort involved! 当length小于7时,效果更好，涉及更少的操作
+
+QuickSort:
+● In place 不需要额外空间
+● not stable
+● No O(nlogn) guarantee
+
+MergeSort
+//对于Object Array来说储存的只是reference，size远小于value。而对于Primitive Value 存的就是value本身
+● Extra memory 需要额外空间
+● Stable
+● O(nlogn) guarantee
+
+Arrays.sort() Java 1.8
+//挑两个pivot，产生的bias更小，更均衡，分成 <P1, =P1,P1<...<P2,=P2,>P2
+● Primitive Value Array: Dual Pivot Quick Sort
+//Time sort 是merge sort的变种
+● Object Array: Tim Sort
+● Insertion Sort involved!
