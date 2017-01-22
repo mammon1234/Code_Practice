@@ -1,0 +1,28 @@
+Binary Tree
+Space :O(n)
+put: O(log n)
+get;O(log n)
+remove:O(log n)
+Iteration:O(n)
+
+//Pre-Order Iteration:mid -left-right
+//Post-Order Iteration:left-right-mid
+
+!!Mid-order Iteration: left-mid-right 
+Get Sorted key
+//Red-black Tree Implementation, balanced Tree!!
+//TreeMap sourcecode
+public TreeMap(){
+	comparator = null;
+}
+
+public TreeMap(Comparator<? super K> comparator){
+	this.comparator =comparator;
+}
+
+TreeSet
+//A wrapper class of TreeMap with Dummy value object
+
+//Set 和 Map区别
+//Map一一对应
+//Set 没有重复的Key
