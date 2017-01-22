@@ -92,6 +92,7 @@ public V put(K key, V value){
 
 static int indexFor(int h,int length){
 	//X mod 2^n == X & (2^n-1)
+	//所以hashmap得长度也始终是2^n
 	return h & (length - 1);
 }
 void createEntry(int hash, K key,V value, int bucketIndex){
@@ -154,3 +155,18 @@ void afterNodeRemoval(Node<K,V> e){
 //Practice LRU Cache
 Implement LRU (Least Recently Used) Cache
 Requirement: Near O(1)put(key,value) and get(key)
+
+public class MyLruCache<K,V> extends LinkedHashMap<K,V>{
+	private int size;
+
+	public MyLruCache(int size){
+	//true 采用access order, default为false采用insertion order
+	//LRU需要access order
+		super(size,0.75f,true);
+		this.size =size;
+	}
+	@Override
+	protected boolean removeEldestEntry(Map.Entry<K,V> eldest){
+		return size() > size;
+	}
+}
