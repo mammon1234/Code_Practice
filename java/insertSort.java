@@ -26,6 +26,7 @@ public class insertSort {
 			list.add(n);
 			n= in.nextInt();
 		}
+		in.close();
 		Integer[] bar = list.toArray(new Integer[list.size()]);
 		for(int i=0;i<bar.length;i++){
 			System.out.println(bar[i]);
