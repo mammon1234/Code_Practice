@@ -56,14 +56,15 @@ private void siftUpcomparable(int k, E x){
 	queue[k] =key;
 }
 
-//Top K numbers
+//Top K numbers,假设是一个stream，那么维持一个固定K的heap
 //default为minheap，
-PriorityQueue<Integer> maxheap = new PriorityQueue<Integer>(k,comparator);
+PriorityQueue<Integer> miniheap = new PriorityQueue<Integer>(k,comparator);
 for(int i:nums){
-	maxheap.add(i);
+	//当size>=K时，只有大于root时，才替换root，并维持minheap
+	miniheap.add(i);
 }
 int [] result = new int[k];
 for(int i =0;i<result.length;i++){
-	result[i] = maxheap.poll();
+	result[i] = miniheap.poll();
 }
 return result;
