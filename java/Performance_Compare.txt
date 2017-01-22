@@ -1,7 +1,15 @@
 			ArrayList	Linked List 	ArrayDeque
 Random AccessO(1)			O(n)		未开放随机访问接口
 AddFirst	O(N)			O(1)			O(1) Am
-AddLast		O(1) Am		O(1)				O(1) Am
-RemoveFirst	O(N)		O(1)				O(1)
-RemoveLast	O(1)		O(1)				O(1)
-Set			O(1)		O(n)				O(1)
+AddLast		O(1) Am			O(1)			O(1) Am
+RemoveFirst	O(N)			O(1)			O(1)
+RemoveLast	O(1)			O(1)			O(1)
+Set		O(1)			O(n)			O(1)
+
+● ArrayList: Resizable Array, 1.5x, Amortized O(1)
+● ArrayDeque: Circular Queue, 2x, Faster Head Operation
+● LinkedList: Nested static class, space consuming
+● Hashing: many-to-one, probing vs. separate chain
+● Hash table: load factor, rehashing
+● Hashmap/set: separate chain, modular optimization
+● Linked Hashmap: Insertion order(default), extends hashmap
