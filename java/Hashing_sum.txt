@@ -39,9 +39,118 @@ arrayIndex = hashCode % length
 Load Factor = Number of entries / length
 
 //Linear probing
-发生Collision，线性向后将value放入空格中
+发生Collision，线性向后将value放入空格中,不生成额外空间，插入快
 //Separate Chain
-发生Collision，相应位置生成一个链表来储存对应元素
+发生Collision，相应位置生成一个链表来储存对应元素，
 
 Near O(1) search time complexity
 Near O(1)  to add a new element
+
+//HashMap Source code verison 1.6
+//实现方法为separate chain
+public class HashMap<K,V> extends AbstractMap<K,V>
+	implements Map<K,V>,Cloneable,Serializable{
+	//当加入第一个元素后，Capacity 变为16
+	Static final int DEFAULT_INITIAL_CAPACITY = 1 << 4;
+	Static final float DEFAULT_LOAD_FACTOR = 0.75f;
+
+	final float loadFactor;
+
+	static final Entry<?,?>[] Empty_TABLE = {};
+	//transient 在程序serialization时，该行不保留
+	transient Entry<K,V>[] table = (Entry<K,V>[]) EMPTY_TABLE;
+}
+
+static class Entry<K,V> implements Map.Entry<K,V>{
+	final K key;
+	V value;
+	Entry<K,V> next;
+	int hash;
+
+	Entry(int h,K k,V v, Entry<K,V> n){
+		value = v;
+		next =n;
+		key = k;
+		hash =h;
+	}
+}
+
+public V put(K key, V value){
+	int hash = hash(key);
+	int i = indexFor(hash, table.length);
+	//扫描第二层，找到目标值
+	for (Entry<K,V> e = table[i]; e!= null; e=e.next){
+		Object k;
+		if(e.hash == hash && ((k = e.key) == key || key.equals(k))){
+			V.oldValue = e.value;
+			e.value = value;
+			e.recordAccess(this);
+			return oldValue;
+		}
+	}
+}
+
+static int indexFor(int h,int length){
+	//X mod 2^n == X & (2^n-1)
+	return h & (length - 1);
+}
+void createEntry(int hash, K key,V value, int bucketIndex){
+	Entry<K,V> e = table[bucketIndex];
+	table[bucketIndex] = new Entry<>(hash,key,value,e);
+	size++;
+}
+//HashMap:Iteration
+//按第一层地址遍历，有额外的第二层，遍历完，再回到上一层
+//因为map的占用空间比list要大得多，所以不推荐在map上遍历
+//Java 8 里面，增加了优化。当第二层冲突较多的时候，会将第二层
+//的list转型为tree来增加搜索效率
+
+
+HashSet
+//HashSet is a wrapper class of HashMap, Value is a constant dummy object
+map = new HashMap<>(initialCapacity);
+}
+public boolean add(E e){
+	return map.put(e,PRESENT) == null;
+}
+private static final Object PRESENT = new Object();
+
+LinkedHashMap
+//LinkedList+HashMap LinkedList maintain entries in Insert Order
+
+public class LinkedHashMap<K,V> extends HashMap<K,V> implements Map<K,V>{
+	static class Entry<K,V> extends HashMap.Node<K,V>{
+		Entry<K,V> before, after;
+		Entry(int hash,K key,V value, Node<K,V> next){
+			super(hash,key,value,next);
+		}
+	}
+
+	transient LinkedHashMap.Entry<K,V> head;
+	transient LinkedHashMap.Entry<K,V> tail;
+}
+
+private void linkNodeLast(LinkedHashMap.entry<K,V> p){
+	LinkedHashMap.Entry<K,V> last = tail;
+	tail = p;
+	if(last == null) head =p;
+	else{
+		p.before =last;
+		last.after =p;
+	}
+}
+//维护linkdelist
+void afterNodeRemoval(Node<K,V> e){
+	LinkdeHashMap.Entry<K,V> p =
+		(LinkedHashMap.Entry<K,V>)e, b = p.before, a=p.after;
+	p.before = p.after = null;
+	if(b == null) head = a;
+	else b.after =a;
+
+	if (a == null) tail =b;
+	else a.before =b; 
+}
+
+//Practice LRU Cache
+Implement LRU (Least Recently Used) Cache
+Requirement: Near O(1)put(key,value) and get(key)
