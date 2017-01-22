@@ -1,0 +1,33 @@
+Sorting Algorithms
+# of Comparisons
+# of Swaps/Copies
+
+Bubble Sort O(N^2)
+//Swap with left neighbor only if element is less/greater than current element
+
+Selection sort O(N^2)
+//Select the minimum/maximum value of rest of elements and swap with it.
+
+Insertion Sort O(N^2)
+//find the right inserting position in left sorted part and insert current element there
+
+		    Bubble Sort 	Selection Sort 		Insertion Sort
+Best Case	O(n)			O(n^2)				O(n)
+Average Case O(n^2)			O(n^2)				O(n^2)
+Worst Case   O(n^2)			O(n^2)				O(n^2)
+Memory		O(1)			O(1)				O(1)
+
+Insertion Sort best
+
+int[] a, int left int right;
+
+for (int i = left, j=i;i <right;j=++i){
+	int ai =a[i+1];
+	while(ai <a[j]){
+		a[j+1] =a[j];
+		if(j-- == left){
+			break;
+		}
+		a[j+1]=ai;
+	}
+}

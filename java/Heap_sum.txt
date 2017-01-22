@@ -44,6 +44,7 @@ public boolean offer(E e){
 }
 
 private void siftUpcomparable(int k, E x){
+	//E 代表 一般的class，而？ super E 代表为E的父类
 	Comparable<? super E> key = (Comparable<? super E>) x;
 	while(k>0){
 		int parent = (k-1) >>>1;
