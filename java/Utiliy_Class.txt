@@ -1,0 +1,36 @@
+//常量 用 大写来表示
+Arrays
+● Arrays.asList() ⇒ return ArrayList
+● Arrays.binarySearch
+● Arrays.copyOf/copyOfRange
+//deepEquals比较的是value而不是reference
+● Arrays.deepEquals/deepHashcode/deepToString
+● Arrays.equals
+● Arrays.fill
+● Arrays.sort
+● Arrays.toString
+
+Collections
+● Collections.addAll/copy/fill
+//判断两个collection有没有overlap，搜索目标object在collection出现几次
+● Collections.disjoin/frequency
+● Collections.reverse/rotate/swap
+● Collections.binarySearch/sort
+● Collections.max/min
+● ...
+
+
+String
+● String.format
+//delimiter 连接符
+● String.join(delimiter, iterable)
+● String.valueOf
+
+Character
+● Character.isUpperCase
+● Character.isDigit
+● Character.isAlphabetic
+● Character.isSpace
+● Character.toUpperCase
+● Character.getNumericValue
+● ...
