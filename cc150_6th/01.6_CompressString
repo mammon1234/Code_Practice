@@ -22,6 +22,7 @@ private countCompression(String str){
 	for(int i =0; i< str.length();i++){
 		count++;
 		if(i+1 == str.length() || str.charAt(i) != str.charAt(i+1)){
+			//不仅是个位数，也有可能是十位数
 			length += 1+String.valueOf(count).length();
 			count =0;
 		}
