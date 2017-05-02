@@ -21,3 +21,22 @@ private boolean isSubstring(String s1, String s2){
 	}
 	return false;
 }
+
+////
+public boolean stringRotation(String str1, String str2){
+	if(str1.length() != str2.length()) return false;
+	if(str1 == null || str1.length() ==1) return true;
+	String temp = str1+str1;
+	return isSubstring(temp, str2);
+}
+
+private boolean isSubstring(String temp, String str2){
+	int len = str2.length();
+	for(int i=0; i<len; i++){
+		for(int j=0; j<len; j++){
+			if(temp.charAt(i+j) != str2.charAt(j)) break;
+			if( j == len-1) return true;
+		}
+	}
+	return false;
+}
