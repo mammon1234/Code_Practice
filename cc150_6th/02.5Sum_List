@@ -1,109 +1,103 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
-public class Solution {
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        if(l1 == null){
-            return l2;
-        }
-        if(l2 == null){
-            return l1;
-        }
-        ListNode dummy = new ListNode(0);
-        ListNode cur = dummy;
-        int res=0, div=0;
-        while(l1 != null && l2 != null){
-            res = (l1.val+l2.val+div) %10;
-            div = (l1.val+l2.val+div) /10;
-            ListNode temp= new ListNode(res);
-            cur.next = temp;
-            cur = cur.next;
-            l1=l1.next;
-            l2=l2.next;
-        }
-        if(l1 != null){
-            while(l1!=null){
-                res = (l1.val+div) %10;
-                div = (l1.val+div) /10;
-                ListNode temp= new ListNode(res);
-                cur.next = temp;
-                cur = cur.next;
-                l1=l1.next;
-            }
-        }
-        if(l2 != null){
-            while(l2!=null){
-                res = (l2.val+div) %10;
-                div = (l2.val+div) /10;
-                ListNode temp= new ListNode(res);
-                cur.next = temp;
-                cur = cur.next;
-                l2=l2.next;
-            }
-        }
-        if(div != 0){
-            ListNode temp= new ListNode(div);
-            cur.next = temp;
-            cur = cur.next;
-        }
-        cur.next = null;
-        return dummy.next;
-    }
+//Reverse Order
+public class Solution{
+	public ListNode addTwoNumbers(ListNode l1, ListNode l2){
+		if(l1 == null) return l2;
+		if(l2 == null) return l1;
+
+		ListNode dummy = new ListNode(0);
+		ListNode cur = dummy;
+
+		int res =0, car =0;
+
+		while(l1 != null && l2 != null){
+			res = (l1.val +l2.val + car) %10;
+			car = (l1.val + l2.val + car) /10;
+			ListNode temp = new ListNode(res);
+			cur.next = temp;
+			cur = cur.next;
+			l1 = l1.next;
+			l2= l2.next;
+		}
+
+		ListNode head = l1;
+		if(l1 == null){
+			head = l2;	
+		}
+
+		while(head != null){
+			res = (head.val+ car)%10;
+			car = (head.val+car)/10;
+			ListNode temp = new ListNode(res);
+			cur.next = temp;
+			cur = cur.next;
+			head = head.next;
+		}
+
+		if(cur != 0){
+			ListNode temp = new ListNode(car);
+			cur.next = temp;
+			cur = cur.next;
+		}
+		cur.next= null;
+		return dummy.next;
+	}
 }
-//follow up 倒序排列
-public ListNode add(ListNode h1, ListNode h2){
-	if(h1 == null){
-		return h2;
+
+// 
+public ListNode add(ListNode l1, ListNode l2){
+	if(l1 == null) return l2;
+	if(l2 == null) return l1;
+
+	Stack<Integer> s1 = new Stack<>();
+	Stack<Integer> s2 = new Stack<>();
+
+	while(l1!= null){
+		s1.push(l1.val);
+		l1=l1.next;
 	}
-	if(h2 == null){
-		return h1;
+	while(l2!=null){
+		s2.push(l2.val);
+		l2=l2.next;
 	}
-	Stack<Integer> s1 = new Stack<Integer>();
-	Stack<Integer> s2 = new Stack<integer>();
-	while(h1!= null){
-		s1.push(h1.val);
-		h1=h1.next;
-	}
-	while(h2!= null){
-		s2.push(h2.val);
-		h2=h2.next;
-	}
-	int div =0,mod = 0,v1=0,v2=0;
-	ListNode dummy = null;
+
+	int v1=0,v2=0,res=0, car=0;
+	ListNode dummy= new ListNode(0);
+	ListNode after = null;
 	while(!s1.isEmpty() && !s2.isEmpty()){
-		v1= s1.pop();
-		v2 = s2.pop();
-		mod = (v1+v2+div)%10;
-		div = (v1+v2+div)/10;
-		ListNode temp = new ListNode(mod);
-		temp.next = dummy;
-		dummy= temp;
+		v1=s1.pop();
+		v2=s2.pop();
+		res = (v1+v2+car) %10;
+		car = (v1+v2+car) /10;
+		ListNode temp = new ListNode(res);
+		dummy.next = temp;
+		temp.next = after;
+		after = temp;
 	}
+
 	while(!s1.isEmpty()){
-		v1= s1.pop();
-		mod = (v1+div)%10;
-		div = (v1+div)/10;
-		ListNode temp = new ListNode(mod);
-		temp.next = dummy;
-		dummy= temp;
+		v1=s1.pop();
+		res = (v1+car) %10;
+		car = (v1+car) /10;
+		ListNode temp = new ListNode(res);
+		dummy.next = temp;
+		temp.next = after;
+		after = temp;
 	}
 	while(!s2.isEmpty()){
-		v2= s2.pop();
-		mod = (v2+div)%10;
-		div = (v2+div)/10;
-		ListNode temp = new ListNode(mod);
-		temp.next = dummy;
-		dummy= temp;
+		v2=s2.pop();
+		res = (v2+car) %10;
+		car = (v2+car) /10;
+		ListNode temp = new ListNode(res);
+		dummy.next = temp;
+		temp.next = after;
+		after = temp;
 	}
-	if(div != 0){
-		ListNode temp = new ListNode(div);
-		temp.next = dummy;
-		dummy= temp;
+
+	if(car != 0){
+		ListNode temp = new ListNode(car);
+		dummy.next = temp;
+		temp.next = after;
+		after = temp;
 	}
-	return dummy;
+	return dummy.next;
 }
