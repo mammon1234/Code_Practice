@@ -1,0 +1,12 @@
+public TreeNode createMinimalBST(int[] arrays){
+  return createMinhelper(arrays,0,arrays.length-1);
+}
+Tree createMinhelper(int[] arrays, int start, int end){
+  if(end < start) return null;
+
+  int mid =(start + end) /2;
+  TreeNode n = new TreeNode(arrays[mid]);
+  n.left = createMinhelper(arrays, start, mid-1);
+  n.right = createMinhelper(arrays, mid+1, end);
+  return n;
+}
