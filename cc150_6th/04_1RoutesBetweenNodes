@@ -1,0 +1,92 @@
+class Node{
+	private Node adjacent[];
+	public int adjacentCount;
+	private String vertex;
+	public Question.State state;
+
+	public Node(String vertex, int adjacentLength){
+		this.vertex = vertex;
+		adjacentCount = 0;
+		adjacent = new Node[adjacentLength];
+	}
+
+	public void addAdjacent(Node x){
+		if(adjacentCount < adjacent.length){
+			this.adjacent[adjacentCount] = x;
+			adjacentCount++;
+		}else{
+			System.out.println("No more adjacent can be added");
+		}
+	}
+
+	public Node[] get Adjacent(){
+		return adjacent;
+	}
+
+	public String getVertex(){
+		return vertex;
+	}
+}
+
+public class Graph{
+	public static int MAX_VERTICES = 6;
+	private Node vertices[];
+	public int count;
+	public Graph(){
+		vertices = new Node[MAX_VERTICES];
+		count = 0;
+	}
+
+	public void addNode(Node x){
+		if(count < vertices.length){
+			vertices[count] = x;
+			count++;
+		}else{
+			System.out.println("Graph full");
+		}
+	}
+
+	public Node[] getNodes(){
+		return vertices;
+	}
+}
+
+public class Question{
+	public enum State{
+		Unvisited, Visited, Visiting;
+	}
+
+	public static Graph createNewGraph(){
+		...
+	}
+
+	public static void main(String[] args){
+		Graph g = createNewGraph();
+		...
+	}
+
+	public static boolean search(Graph g, Node start, Node end){
+		LinkedList<Node> q = new LinkedList<>();
+		for(Node u : g.getNodes()){
+			u.state = State.Unvisited;
+		}
+		start.state = State.Visiting;
+		q.add(start);
+		Node u;
+		while(!q.isEmpty()){
+			u = q.removeFirst();
+			if(u != null){
+				for(Node v : u.getAdjacent()){
+					if(v.state == State.Unvisited){
+						if(v == end){return true;}
+					}else{
+						v.state = State.Visiting;
+						q.add(v);
+					}
+				}
+			}
+			u.state = State.Visited;
+		}
+		return false;
+	}
+}
