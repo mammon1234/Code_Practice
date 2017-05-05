@@ -1,0 +1,23 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if(root == null) return true;
+        return balancedHelper(root) >=0;
+    }
+    
+    private int balancedHelper(TreeNode root){
+        if(root == null) return 0;
+        int h1 = balancedHelper(root.left);
+        int h2 = balancedHelper(root.right);
+        
+        return (h1<0||h2<0||Math.abs(h1-h2)>1) ? -1 :(Math.max(h1,h2)+1);
+    }
+}
