@@ -1,1 +1,34 @@
+public class BuildOrder{
+	public static List<Integer> buildOrder(int[][] processes){
+		Set<Integer> temporaryMarks = new HashSet<>();
+		Set<Integer> permanentMarks = new HashSet<>();
+		List<Integer> results = new LinkedList<>();
 
+		//Recursively search from unmarked node
+		for(int i=0; i<processes.length; i++){
+			if(!permanentMarks.contains(i)){
+				visit(i,processes,temporaryMarks,permanentMarks,result);
+			}
+		}
+		return result;
+	}
+
+	//
+	public void visit(int process, int[][] processes, Set<Integer> temporaryMarks, Set<Integer> permanentMarks, List<Integer> result){
+		if(temporaryMarks.contains(process)){
+			throw new RuntimeException("Graph is not acyclic");
+		}
+
+		if(!permanentMarks.contains(process)){
+			temporaryMarks.add(process);
+
+			for(int i : processes[process]){
+				visit(i, process, temporaryMarks, permanentMarks, result);
+			}
+
+			permanentMarks.add(process);
+			temporaryMarks.remove(process);
+			result.add(process);
+		}
+	}
+}
