@@ -16,3 +16,35 @@ public class Solution {
         return (min==null || root.val> min)&&(max==null || root.val<max)&&BSThelper(root.left, min,root.val)&&BSThelper(root.right,root.val,max);
     }
 }
+
+///
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if(root == null) return true;
+        Integer min = null;
+        Stack<TreeNode> stack = new Stack<>();
+        
+        while(root !=null || !stack.isEmpty()){
+            if(root != null){
+                stack.push(root);
+                root = root.left;
+            }else{
+                root = stack.pop();
+                if(min != null && root.val <=min) return false;
+                min= root.val;
+                
+                root = root.right;
+            }
+        }
+        return true;
+    }
+}
