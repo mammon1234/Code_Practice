@@ -1,0 +1,28 @@
+public class Solution{
+	public TreeNode inorderSucc(TreeNode n){
+		if(n=null) return null;
+
+		//
+		if(n.parent == null || n.right != null){
+			return leftMostChild(n.right);
+		}else{
+			TreeNode cur=n;
+			TreeNode par=cur.parent;
+			while(par !=null && par.left != q){
+				cur = par;
+				par = par.parent;
+			}
+			return par;
+		}
+	}
+
+	public TreeNode lefMostChild(TreeNode n){
+		if(n== null){
+			return null;
+		}
+		while(n.left != null){
+			n= n.left;
+		}
+		return n;
+	}
+}
