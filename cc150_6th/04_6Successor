@@ -8,7 +8,7 @@ public class Solution{
 		}else{
 			TreeNode cur=n;
 			TreeNode par=cur.parent;
-			while(par !=null && par.left != q){
+			while(par !=null && par.left != cur){
 				cur = par;
 				par = par.parent;
 			}
